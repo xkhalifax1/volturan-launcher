@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>volturan.com | البيئة الآمنة</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 35%, #16213e 100%);
+            min-height: 100vh;
+            color: white;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(0, 255, 136, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 136, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(255, 0, 136, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .logo {
+            background: linear-gradient(45deg, #00ff88, #00d4aa, #0088ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+            text-shadow: 0 0 30px rgba(0, 255, 136, 0.3);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 20px rgba(0, 255, 136, 0.3)); }
+            to { filter: drop-shadow(0 0 30px rgba(0, 255, 136, 0.6)); }
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #64ffda;
+            font-weight: 300;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        .security-badge {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            gap: 8px;
+            backdrop-filter: blur(10px);
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .tool-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            group: hover;
+        }
+
+        .tool-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .tool-card:hover::before {
+            left: 100%;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(0, 255, 136, 0.4);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.3),
+                0 0 20px rgba(0, 255, 136, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .tool-icon {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 20px;
+            display: block;
+            transition: transform 0.3s ease;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+        }
+
+        .backup-icon {
+            font-size: 3rem;
+            width: auto;
+            height: auto;
+        }
+
+        .tool-card:hover .tool-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .tool-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+
+        .tool-description {
+            color: #b0bec5;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .launch-btn {
+            background: linear-gradient(45deg, #00ff88, #00d4aa);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            color: #000;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .launch-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .launch-btn:hover::before {
+            left: 100%;
+        }
+
+        .launch-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 255, 136, 0.3);
+        }
+
+        .launch-btn:active {
+            transform: translateY(0);
+        }
+
+        .status-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            padding: 10px 20px;
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+            display: none;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #00ff88;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.05;
+        }
+
+        .floating-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(0, 255, 136, 0.6);
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        .kali { background: linear-gradient(135deg, #2e7d32, #4caf50); }
+        .vmware { background: linear-gradient(135deg, #1976d2, #42a5f5); }
+        .virtualbox { background: linear-gradient(135deg, #1976d2, #64b5f6); }
+        .metasploit { background: linear-gradient(135deg, #d32f2f, #f44336); }
+        .parrot { background: linear-gradient(135deg, #f57c00, #ffb74d); }
+        .volturan { background: linear-gradient(135deg, #00ff88, #00d4aa); }
+
+        @media (max-width: 768px) {
+            .tools-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .logo {
+                font-size: 2.5rem;
+            }
+            
+            .tool-card {
+                padding: 25px;
+            }
+        }
+
+        .terminal-window {
+            background: #1a1a1a;
+            border-radius: 8px;
+            margin: 20px 0;
+            overflow: hidden;
+            border: 1px solid #333;
+        }
+
+        .terminal-header {
+            background: #2d2d2d;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .terminal-btn {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .terminal-btn.close { background: #ff5f56; }
+        .terminal-btn.minimize { background: #ffbd2e; }
+        .terminal-btn.maximize { background: #27ca3f; }
+
+        .terminal-content {
+            padding: 15px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: #00ff88;
+            background: #0a0a0a;
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-particles"></div>
+    
+    <div class="container">
+        <div class="header">
+            <h1 class="logo">volturan.com</h1>
+            <p class="subtitle">البيئة الآمنة | Secure Environment</p>
+            <div class="security-badge">
+                <span>🔒</span>
+                <span>Professional Security Toolkit</span>
+            </div>
+        </div>
+
+        <div class="tools-grid">
+            <div class="tool-card volturan" onclick="openTool('https://volturan.com', 'الموقع الرسمي')">
+                <img class="tool-icon" src="https://volturan.com/favicon.ico" alt="Volturan" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <span class="tool-icon backup-icon" style="display:none;">🌐</span>
+                <h3 class="tool-name">volturan.com</h3>
+                <p class="tool-description">الموقع الرسمي - Your gateway to cybersecurity excellence and professional security solutions</p>
+                <button class="launch-btn">الدخول للموقع</button>
+            </div>
+
+            <div class="tool-card kali" onclick="openTool('https://www.kali.org', 'Kali Linux')">
+                <img class="tool-icon" src="https://www.kali.org/images/kali-dragon-icon.svg" alt="Kali Linux" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <span class="tool-icon backup-icon" style="display:none;">🐉</span>
+                <h3 class="tool-name">Kali Linux</h3>
+                <p class="tool-description">Advanced penetration testing platform with 600+ pre-installed security tools</p>
+                <button class="launch-btn">Launch Kali</button>
+            </div>
+
+            <div class="tool-card vmware" onclick="openTool('https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion', 'VMware Workstation')">
+                <img class="tool-icon" src="https://logos-world.net/wp-content/uploads/2021/02/VMware-Logo.png" alt="VMware" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <span class="tool-icon backup-icon" style="display:none;">⚡</span>
+                <h3 class="tool-name">VMware Workstation</h3>
+                <p class="tool-description">Industry-leading desktop hypervisor for running multiple operating systems</p>
+                <button class="launch-btn">Get VMware</button>
+            </div>
+
+            <div class="tool-card virtualbox" onclick="openTool('https://www.virtualbox.org/wiki/Downloads', 'VirtualBox')">
+                <img class="tool-icon" src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Virtualbox_logo.png" alt="VirtualBox" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <span class="tool-icon backup-icon" style="display:none;">📦</span>
+                <h3 class="tool-name">VirtualBox</h3>
+                <p class="tool-description">Free and open-source virtualization platform for testing environments</p>
+                <button class="launch-btn">Download VBox</button>
+            </div>
+
+            <div class="tool-card metasploit" onclick="openTool('https://sourceforge.net/projects/metasploitable/', 'Metasploit')">
+                <img class="tool-icon" src="https://th.bing.com/th/id/OIP.xQrEOoHC-HQcISxWTEh1LwHaHa?rs=1&pid=ImgDetMain" alt="Metasploit" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <span class="tool-icon backup-icon" style="display:none;">🎯</span>
+                <h3 class="tool-name">Metasploit Framework</h3>
+                <p class="tool-description">Comprehensive exploitation framework for penetration testing and vulnerability assessment</p>
+                <button class="launch-btn">Access Framework</button>
+            </div>
+
+            <div class="tool-card parrot" onclick="openTool('https://parrotsec.org', 'Parrot OS')">
+                <img class="tool-icon" src="https://parrotsec.org/img/logo.png" alt="Parrot OS" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <span class="tool-icon backup-icon" style="display:none;">🦜</span>
+                <h3 class="tool-name">Parrot Security OS</h3>
+                <p class="tool-description">Debian-based security-focused distribution for ethical hacking and digital forensics</p>
+                <button class="launch-btn">Get Parrot</button>
+            </div>
+        </div>
+
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-btn close"></div>
+                <div class="terminal-btn minimize"></div>
+                <div class="terminal-btn maximize"></div>
+                <span style="margin-left: 10px; color: #fff; font-size: 0.85rem;">Security Tools Terminal</span>
+            </div>
+            <div class="terminal-content">
+                <div id="terminal-output">
+                    <div>volturan@security:~$ ./launcher.py</div>
+                    <div>🔒 Initializing secure environment...</div>
+                    <div>✅ All security tools loaded successfully</div>
+                    <div>📡 Ready for deployment</div>
+                    <div style="color: #64ffda;">$> Waiting for user input...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="status-indicator" id="statusIndicator">
+        <div class="status-dot"></div>
+        <span id="statusText">تم فتح الأداة بنجاح</span>
+    </div>
+
+    <script>
+        // Create floating particles
+        function createParticles() {
+            const container = document.querySelector('.floating-particles');
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                container.appendChild(particle);
+            }
+        }
+
+        // Tool opening function
+        function openTool(url, toolName) {
+            const statusIndicator = document.getElementById('statusIndicator');
+            const statusText = document.getElementById('statusText');
+            const terminalOutput = document.getElementById('terminal-output');
+            
+            // Show status
+            statusText.textContent = `فتح ${toolName}...`;
+            statusIndicator.style.display = 'flex';
+            
+            // Add terminal output
+            const newLine = document.createElement('div');
+            newLine.innerHTML = `<span style="color: #00ff88;">$></span> Opening ${toolName}...`;
+            terminalOutput.appendChild(newLine);
+            
+            // Open URL
+            window.open(url, '_blank');
+            
+            // Update status after delay
+            setTimeout(() => {
+                statusText.textContent = `تم فتح ${toolName} بنجاح ✅`;
+                const successLine = document.createElement('div');
+                successLine.innerHTML = `<span style="color: #64ffda;">✅</span> ${toolName} launched successfully`;
+                terminalOutput.appendChild(successLine);
+                
+                // Scroll terminal to bottom
+                terminalOutput.scrollTop = terminalOutput.scrollHeight;
+            }, 1000);
+            
+            // Hide status after 3 seconds
+            setTimeout(() => {
+                statusIndicator.style.display = 'none';
+            }, 3000);
+        }
+
+        // Matrix rain effect (simplified)
+        function createMatrixRain() {
+            const canvas = document.createElement('canvas');
+            canvas.className = 'matrix-bg';
+            const ctx = canvas.getContext('2d');
+            document.body.appendChild(canvas);
+            
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            const chars = '01';
+            const columns = canvas.width / 20;
+            const drops = Array(Math.floor(columns)).fill(1);
+            
+            function draw() {
+                ctx.fillStyle = 'rgba(15, 15, 35, 0.05)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                ctx.fillStyle = 'rgba(0, 255, 136, 0.1)';
+                ctx.font = '15px monospace';
+                
+                for (let i = 0; i < drops.length; i++) {
+                    const text = chars[Math.floor(Math.random() * chars.length)];
+                    ctx.fillText(text, i * 20, drops[i] * 20);
+                    
+                    if (drops[i] * 20 > canvas.height && Math.random() > 0.975) {
+                        drops[i] = 0;
+                    }
+                    drops[i]++;
+                }
+            }
+            
+            setInterval(draw, 50);
+        }
+
+        // Initialize effects
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            createMatrixRain();
+            
+            // Add terminal typing effect
+            const terminalLines = document.querySelectorAll('#terminal-output > div');
+            terminalLines.forEach((line, index) => {
+                line.style.opacity = '0';
+                setTimeout(() => {
+                    line.style.opacity = '1';
+                    line.style.animation = 'fadeIn 0.5s ease';
+                }, index * 500);
+            });
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            const canvas = document.querySelector('.matrix-bg');
+            if (canvas) {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+        });
+
+        // Add CSS for fade animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
